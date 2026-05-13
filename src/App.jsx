@@ -10,6 +10,7 @@ import Cabinet from "./pages/Cabinet";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import "./styles/global.css";
+import AdminEvents from "./pages/AdminEvents";
 
 export default function App() {
   return (
@@ -26,6 +27,7 @@ export default function App() {
               <Route path="/cabinet" element={<Cabinet />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/admin" element={<AdminEvents />} />
             </Routes>
           </main>
           <Footer />
