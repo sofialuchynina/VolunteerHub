@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { collection, getDocs, query, orderBy, limit, where } from "firebase/firestore";
+import { collection, getDocs, query, orderBy, limit } from "firebase/firestore";
 import { db } from "../firebase/config";
 import EventCard from "../components/EventCard";
 import "./Home.css";
+import { useAuth } from "../context/AuthContext";
 
 export default function Home() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState({ volunteers: 0, events: 0, avgRating: 0 });
+  const { currentUser } = useAuth(); // Отримуємо статус користувача
 
   useEffect(() => {
     async function load() {
@@ -47,11 +49,19 @@ export default function Home() {
             <div className="section-tag" style={{ display: "inline-block", marginBottom: 20 }}>🌿 Волонтерська ініціатива</div>
             <h1 className="hero-title">Разом ми<br /><em>змінюємо</em><br />світ на краще</h1>
             <p className="hero-sub">Приєднуйся до спільноти волонтерів — беруй участь у подіях, допомагай ближнім і оцінюй ініціативи.</p>
+            
             <div className="hero-btns">
               <Link to="/events" className="btn btn-primary btn-lg">Переглянути події →</Link>
-              <Link to="/register" className="btn btn-outline btn-lg">Стати волонтером</Link>
+              
+              {/* ЛОГІКА КНОПКИ: Якщо не залогінений - "Стати волонтером", якщо залогінений - "Мій кабінет" */}
+              {currentUser ? (
+                <Link to="/cabinet" className="btn btn-outline btn-lg">Мій кабінет</Link>
+              ) : (
+                <Link to="/register" className="btn btn-outline btn-lg">Стати волонтером</Link>
+              )}
             </div>
           </div>
+
           <div className="hero-visual">
             <div className="hero-card hc-1">
               <span className="hc-emoji">🏙️</span>
@@ -148,12 +158,22 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* CTA: Ховаємо або міняємо текст для зареєстрованих */}
       <section className="cta-section">
         <div className="cta-inner">
-          <h2>Готовий змінювати світ?</h2>
-          <p>Приєднуйся до тисяч волонтерів вже сьогодні</p>
-          <Link to="/register" className="btn btn-accent btn-lg">Приєднатись безкоштовно →</Link>
+          {currentUser ? (
+            <>
+              <h2>Раді бачити тебе знову!</h2>
+              <p>Твоя допомога робить світ кращим кожного дня.</p>
+              <Link to="/events" className="btn btn-accent btn-lg">До нових пригод! →</Link>
+            </>
+          ) : (
+            <>
+              <h2>Готовий змінювати світ?</h2>
+              <p>Приєднуйся до тисяч волонтерів вже сьогодні</p>
+              <Link to="/register" className="btn btn-accent btn-lg">Приєднатись безкоштовно →</Link>
+            </>
+          )}
         </div>
       </section>
     </div>
