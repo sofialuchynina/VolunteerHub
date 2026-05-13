@@ -1,0 +1,143 @@
+.home { display: flex; flex-direction: column; }
+
+/* HERO */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding-top: 80px;
+}
+.hero-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+.hero-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.15;
+}
+.b1 { width: 600px; height: 600px; background: var(--green); top: -200px; right: -100px; }
+.b2 { width: 400px; height: 400px; background: var(--accent); bottom: 0; left: -100px; }
+
+.hero-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+.hero-title em { font-style: normal; color: var(--green); }
+.hero-sub { font-size: 1.08rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 32px; max-width: 460px; }
+.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* Hero visual */
+.hero-visual { position: relative; height: 420px; }
+.hero-main-blob {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 260px; height: 260px;
+  background: linear-gradient(135deg, var(--green-pale), var(--green-light));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: float 4s ease-in-out infinite;
+}
+.blob-emoji { font-size: 5rem; }
+@keyframes float { 0%,100% { transform: translate(-50%,-50%) translateY(0); } 50% { transform: translate(-50%,-50%) translateY(-14px); } }
+
+.hero-card {
+  position: absolute;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: var(--shadow-lg);
+  animation: float 4s ease-in-out infinite;
+}
+.hero-card p { font-size: 0.78rem; color: var(--text-muted); margin: 0; }
+.hero-card strong { font-size: 0.92rem; display: block; }
+.hc-emoji { font-size: 1.5rem; }
+.hc-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--green-light); flex-shrink: 0; }
+.hc-1 { top: 30px; left: -20px; animation-delay: -1s; }
+.hc-2 { top: 30px; right: -10px; animation-delay: -2s; }
+.hc-3 { bottom: 50px; left: 50%; transform: translateX(-50%); animation-delay: -0.5s; white-space: nowrap; }
+
+/* Stats bar */
+.hero-stats { background: var(--green); }
+.hero-stats-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+}
+.hs-item { text-align: center; }
+.hs-num { font-family: var(--font-display); font-size: 2rem; font-weight: 800; color: #fff; display: block; }
+.hs-label { font-size: 0.85rem; color: rgba(255,255,255,0.7); }
+.hs-divider { width: 1px; height: 40px; background: rgba(255,255,255,0.25); }
+
+/* Steps */
+.how-section { background: var(--surface2); }
+.steps-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 24px; }
+.step-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px 24px;
+  text-align: center;
+  position: relative;
+}
+.step-num {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--green-light);
+  letter-spacing: 0.1em;
+  margin-bottom: 16px;
+}
+.step-icon { font-size: 2.5rem; margin-bottom: 16px; }
+.step-card h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 700; margin-bottom: 10px; }
+.step-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+
+/* CTA */
+.cta-section {
+  background: linear-gradient(135deg, var(--green) 0%, var(--green-mid) 100%);
+  padding: 80px 0;
+}
+.cta-inner {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 24px;
+  text-align: center;
+}
+.cta-inner h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  color: #fff;
+  margin-bottom: 14px;
+}
+.cta-inner p { color: rgba(255,255,255,0.8); margin-bottom: 32px; font-size: 1.05rem; }
+
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-visual { display: none; }
+  .hero-stats-inner { gap: 32px; flex-wrap: wrap; }
+  .hero-btns { flex-direction: column; }
+  .hero-btns .btn { justify-content: center; }
+}
